@@ -1,0 +1,91 @@
+<html>
+<head>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
+
+  <style type="text/css">
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #container {
+        width : 600px;
+        height: 384px;
+        margin: 8px auto;
+      }
+    </style>
+</head>
+<body>
+
+
+  <div id="container">
+  </div>
+
+  <script type="text/javascript" src="flotr2.min.js"></script>
+
+  <script type="text/javascript">
+    (function () {
+      var container = document.getElementById('container');
+      var data = [];
+      var d1 = [], d2 = [];
+      var graph, i;
+
+      // Sample the sine function
+      //for (i = 0; i < 4 * Math.PI; i += 0.2) {
+      //  data.push([i, Math.sin(i)]);
+      //}
+
+      $.getJSON('source.json?callback=?', function(data) {
+          //do stuff with your data here
+          alert("Hej");
+          d2 = data.source.d1;
+
+      });
+
+
+      /*
+      $.ajax({
+        dataType: "jsonp",
+        url: 'source.json' ,
+        }).done(function ( data ) {
+          alert("Hej");
+      });
+      */
+
+      d1.push([1,1]);
+      d1.push([2,2]);
+      d1.push([3,4]);
+
+
+      data = [
+          { data : d1, label :'Linje 1' },
+          { data : d2, label :'Linje 2' }
+        ];
+
+        function labelFn (label) {
+          return label;
+        }
+      /*
+      // Draw Graph
+      graph = Flotr.draw(container, [ data ], {
+      //  yaxis : {
+      //    max : 2,
+      //    min : -2
+      //  }
+      });
+      */
+      // Draw graph
+      graph = Flotr.draw(container, data, {
+        legend : {
+          position : 'se',            // Position the legend 'south-east'.
+          labelFormatter : labelFn,   // Format the labels.
+          backgroundColor : '#D2E8FF' // A light blue background color.
+        },
+        HtmlText : false
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
